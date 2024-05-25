@@ -1,30 +1,40 @@
+import os
 
+def write_file(band_name):
+    cwd = os.getcwd()
+    f = open(f"{cwd}\\band_names.txt", "a")
+    f.write(f"{band_name}\n")
+    f.close()
 
-#TODO Ask a pet nam
-pet_name = input("Please, chose a pet name: ")
-
-#TODO: Ask a city
-city = input("Please, chose a city: ")
-
-#TODO: Display the result
-print(f"Your band name is \"{city} {pet_name}\"")
-
-#TODO: Create or incremente the file
-def write_file():
-    pass
-
-#TODO: Ask if start again or not
 def try_again():
-    pass
-
-#TODO: Ask to save the name in a txt file
-def question_save_file():
-    save_file = input("Do you want to save the name ?")
-    # if the answer is affirmative
-    if save_file in ["T", "t", "y", "yes", "true", "Yes", "o", "oui"]:
-        write_file()
-    if save_file in ["F", "f", "n", "no", "false", "No", "non"]:
+    try_again_question = input("Try again ?")
+    if try_again_question in ["T", "t", "y", "yes", "true", "Yes", "o", "oui"]:
+        create_group_name()
+    elif try_again_question in ["F", "f", "n", "no", "false", "No", "non"]:
+        exit()
+    else:
+        print("Please confirm with \"y\" or \"n\".")
         try_again()
 
+def question_save_file(band_name):
+    save_file = input("Do you want to save the name ? ")
+    # if the answer is affirmative
+    if save_file in ["T", "t", "y", "yes", "true", "Yes", "o", "oui"]:
+        write_file(band_name)
+    elif save_file in ["F", "f", "n", "no", "false", "No", "non"]:
+        try_again()
+    else:
+        print("Please confirm with \"y\" or \"n\".")
+        question_save_file(band_name)
+    try_again()
 
-#TODO: Begin by asking if the want to take a random input from the file
+def create_group_name():
+    pet_name = input("Please, chose a pet name: ")
+    city = input("Please, chose a city: ")
+
+    band_name = f"{city} {pet_name}"
+    print(f"Your band name is \"{band_name}\"")
+
+    question_save_file(band_name)
+
+create_group_name()
