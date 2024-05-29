@@ -1,4 +1,5 @@
 user_position = [0,0]
+older_user_positon = []
 steps_done = []
 
 found_treasure = False
@@ -7,19 +8,15 @@ def calculation(u, m):
     size = (10,10,-10,-10)
     if m in ["up", "u"]:
         u[1] += 1
-        u = check_position(u, size)
     elif m in ["right", "r"]:
         u[0] += 1
-        check_position(u, size)
     elif m in ["back", "b"]:
         u[1] -= 1
-        check_position(u, size)
     elif m in ["left", "l"]:
         u[0] -= 1
-        check_position(u, size)
     else:
         print("Please chose one of the directions")
-        check_position(u, size)
+    u = check_position(u, size)
     return u,m
 
 def action_choice(user):
@@ -35,15 +32,12 @@ def map_route(a):
         previous_action = steps_done[-1]
     return previous_action
 
-def set_direction(action, last_action):
-    pass
 
 def hint(u, a):
     last_action = map_route(a)
     treasure_position = [-5,5]
     print(f"Your position is {u}")
-    
-    set_direction(a, last_action)
+
     
     if u == treasure_position:
         print("You found the treasure !")
@@ -66,6 +60,7 @@ def check_position(user, position):
     return user
 
 while found_treasure == False:
+    #TODO: calculer l'ancienne position ici
     action = action_choice(user_position)
     user_position = action[0]
     action = action[1]
