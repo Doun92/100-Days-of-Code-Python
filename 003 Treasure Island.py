@@ -1,6 +1,6 @@
 user_position = [0,0]
 # steps_done = []
-position_history = {}
+position_history = []
 
 found_treasure = False
 
@@ -31,13 +31,20 @@ def map_route(u, a, treasure_position):
     elif a in ["right", "r", "left", "l"]:
         result = u[0] - treasure_position[0]
     distance_from_zero = abs(result)
+    position_history.append(distance_from_zero)
+    return position_history
+
+def generate_hint(m):
+    print(m)
 
 def hint(u, a):
     treasure_position = [-5,5]
     print(f"Your position is {u}")
 
     my_map = map_route(u, a, treasure_position)
-    print(f"The map: {my_map}")
+    # print(f"The map: {my_map}")
+    hint = generate_hint(my_map)
+    print(hint)
     
     if u == treasure_position:
         print("You found the treasure !")
