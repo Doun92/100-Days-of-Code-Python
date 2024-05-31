@@ -36,6 +36,19 @@ def map_route(u, a, treasure_position):
 
 def generate_hint(m):
     print(m)
+    try:
+        last_step = m[-2]
+    except:
+        last_step = m[-1]
+    print(last_step)
+    if m[-1] > last_step:
+        message = "Colder"
+    elif m[-1] < last_step:
+        message = "Warmer"
+    else:
+        message = ""
+    return message
+    
 
 def hint(u, a):
     treasure_position = [-5,5]
@@ -71,7 +84,3 @@ while found_treasure == False:
     user_position = action[0]
     action = action[1]
     hint(user_position, action)
-    
-# Ce qu'il faut faire, c'est calculer la distance entre le user et le trésor.
-# Il faut enregistrer cette distance (pourquoi pas dans une liste)
-#
