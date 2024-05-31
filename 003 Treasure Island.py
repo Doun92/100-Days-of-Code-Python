@@ -1,11 +1,12 @@
 user_position = [0,0]
-older_user_positon = []
-steps_done = []
+# steps_done = []
+position_history = {}
 
 found_treasure = False
 
 def calculation(u, m):
     size = (10,10,-10,-10)
+    # Ajouter map pour montrer la liste position_history
     if m in ["up", "u"]:
         u[1] += 1
     elif m in ["right", "r"]:
@@ -24,20 +25,19 @@ def action_choice(user):
     new_place = calculation(user, mouvement)
     return new_place
 
-def map_route(a):
-    steps_done.append(a)
-    try:
-        previous_action = steps_done[-2]
-    except:
-        previous_action = steps_done[-1]
-    return previous_action
-
+def map_route(u, a, treasure_position):
+    if a in ["up", "u", "back", "b"]:
+        result = u[1] - treasure_position[1]
+    elif a in ["right", "r", "left", "l"]:
+        result = u[0] - treasure_position[0]
+    distance_from_zero = abs(result)
 
 def hint(u, a):
-    last_action = map_route(a)
     treasure_position = [-5,5]
     print(f"Your position is {u}")
 
+    my_map = map_route(u, a, treasure_position)
+    print(f"The map: {my_map}")
     
     if u == treasure_position:
         print("You found the treasure !")
@@ -60,8 +60,11 @@ def check_position(user, position):
     return user
 
 while found_treasure == False:
-    #TODO: calculer l'ancienne position ici
     action = action_choice(user_position)
     user_position = action[0]
     action = action[1]
     hint(user_position, action)
+    
+# Ce qu'il faut faire, c'est calculer la distance entre le user et le trésor.
+# Il faut enregistrer cette distance (pourquoi pas dans une liste)
+#
