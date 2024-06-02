@@ -1,5 +1,36 @@
 from random import randint
 
+def battle(player, opponent):
+    loose_message = "You loose !"
+    win_message = "You won !"
+    draw_message = "It is a draw !"
+    
+    print(f"You chose: {player}")
+    print(f"Your opponent chose: {opponent}")
+
+    if player == "stone":
+        if opponent == "paper":
+            return loose_message
+        elif opponent == "scissors":
+            return win_message
+        else:
+            return draw_message
+    elif player == "paper":
+        if opponent == "paper":
+            return draw_message
+        elif opponent == "scissors":
+            return loose_message
+        else:
+            return win_message
+    elif player == "scissors":
+        if opponent == "paper":
+            return win_message
+        elif opponent == "scissors":
+            return draw_message
+        else:
+            return loose_message
+
+
 def player_validation(i):
     if i in ["s", "stone", "S"]:
         return "stone"
@@ -17,13 +48,20 @@ def choice():
 
     return valid_choice
 
-def random_choice():
+def get_random_choice():
     random_nb = randint(1,3)
-    print(random_nb)
+    if random_nb == 1:
+        return "stone"
+    elif random_nb == 2:
+        return "stone"
+    elif random_nb == 3:
+        return "scissors"
 
 valid_choice = "none"
 while valid_choice == "none":
     valid_choice = choice()
 
-print(valid_choice)
-random_choice()
+random_choice = get_random_choice()
+
+result_battle = battle(valid_choice, random_choice)
+print(result_battle)
