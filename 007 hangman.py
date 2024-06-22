@@ -1,45 +1,29 @@
-word = "libraire"
-used_letters = []
-correct_letters = []
+from random import choice
 
-# Cette liste servira à la vérification si tous les caractères sont bons ou pas.
-def word_to_letters(word):
-    # On transforme la string en liste
-    # Transforme la liste en dictionnaire pour supprimer les duplicats
-    # Reforme la liste sans les duplicats
-    word = list(dict.fromkeys(list(word)))
-    # TODO: Mettre en ordre les lettres
-    return word
+liste_mots = ["souris", "lynx", "football", "sprint", "chat"]
+mot = choice(liste_mots)
 
-def get_user_choice():
-    while True:
-        user_choice = input("Choose a letter: ")
+fin_jeu = False
 
-        if len(user_choice) == 0:
-            continue
-        elif len(user_choice) > 1:
-            user_choice = user_choice[0]
-            
-        return user_choice
+print(mot)
 
-def check_right(user, word, correct_letters):
-    if user in list(word):
-        correct_letters.append(user)
+display = []
+longueur_mot = len(mot)
+for lettre in mot:
+    display += "_"
+print(display)
 
+while fin_jeu == False:
+    choix = input("Choisis une lettre: ")
 
+    for position in range(longueur_mot):
+        lettre = mot[position]
+        if choix == lettre:
+            display[position] = lettre
+        else:
+            # print("Non")
+            pass
 
-def check_letter_used(user,used_letters):
-    if user in used_letters:
-        print("Letter already used.")
-        print(f"Here are the letters used: \n ***\n{used_letters}\n***")
-    else:
-        used_letters.append(user)
-    check_right(user, word, correct_letters)
-
-cleaned_word = word_to_letters(word)
-
-while correct_letters != cleaned_word:
-
-    user_lettter = get_user_choice()
-
-    check_letter_used(user_lettter, used_letters)
+    print(display)
+    if "_" not in display:
+        fin_jeu = True
