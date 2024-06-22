@@ -1,6 +1,15 @@
-word = "bosquet"
+word = "libraire"
 used_letters = []
 correct_letters = []
+
+# Cette liste servira à la vérification si tous les caractères sont bons ou pas.
+def word_to_letters(word):
+    # On transforme la string en liste
+    # Transforme la liste en dictionnaire pour supprimer les duplicats
+    # Reforme la liste sans les duplicats
+    word = list(dict.fromkeys(list(word)))
+    # TODO: Mettre en ordre les lettres
+    return word
 
 def get_user_choice():
     while True:
@@ -25,10 +34,12 @@ def check_letter_used(user,used_letters):
         print(f"Here are the letters used: \n ***\n{used_letters}\n***")
     else:
         used_letters.append(user)
-    # print(used_letters)
     check_right(user, word, correct_letters)
 
-user_lettter = get_user_choice()
-# print(user_lettter)
+cleaned_word = word_to_letters(word)
 
-check_letter_used(user_lettter, used_letters)
+while correct_letters != cleaned_word:
+
+    user_lettter = get_user_choice()
+
+    check_letter_used(user_lettter, used_letters)
